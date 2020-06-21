@@ -26,7 +26,7 @@ var commentRoute = require("./routes/comments"),
 // });
 
 // for development =========================
-mongoose.connect(process.env.DATABASEURL, {
+mongoose.connect("mongodb+srv://Asfand:VbJZG8lZlEQNuMjz@cluster0-hfbjn.mongodb.net/development?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
