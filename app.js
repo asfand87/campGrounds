@@ -13,7 +13,20 @@ var seedDB = require("./seeds");
 var commentRoute = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes = require("./routes/index");
-mongoose.connect("mongodb+srv://Asfand:VbJZG8lZlEQNuMjz@cluster0-hfbjn.mongodb.net/YelpCampDB?retryWrites=true&w=majority", {
+    // for end users.
+// mongoose.connect("mongodb+srv://Asfand:VbJZG8lZlEQNuMjz@cluster0-hfbjn.mongodb.net/YelpCampDB?retryWrites=true&w=majority", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false
+// }).then(() => {
+//     console.log("connected to DB");
+// }).catch(err => {
+//     console.log("error", err.message);
+// });
+
+// for development =========================
+mongoose.connect(process.env.DATABASEURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -23,6 +36,7 @@ mongoose.connect("mongodb+srv://Asfand:VbJZG8lZlEQNuMjz@cluster0-hfbjn.mongodb.n
 }).catch(err => {
     console.log("error", err.message);
 });
+console.log(process.env.DATABASEURL);
 
 //using ejs here so we don't have to type ejs at the end of files.
 app.set("view engine", "ejs");
