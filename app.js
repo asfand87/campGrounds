@@ -13,8 +13,9 @@ var seedDB = require("./seeds");
 var commentRoute = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes = require("./routes/index");
+var url = process.env.DATABASEURL || "mongodb+srv://Asfand:VbJZG8lZlEQNuMjz@cluster0-hfbjn.mongodb.net/YelpCampv15?retryWrites=true&w=majority";
     // for end users.
-mongoose.connect(process.env.DATABASEURL, {
+mongoose.connect(url , {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
