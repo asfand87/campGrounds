@@ -79,3 +79,7 @@ body{
 .no-cssanimations .slideshow li {
 	opacity: 1;
 }
+
+#login{
+  margin:0 auto;
+}
