@@ -15,6 +15,7 @@ var commentRoute = require("./routes/comments"),
     indexRoutes = require("./routes/index");
 var url = process.env.DATABASEURL || "mongodb+srv://Asfand:VbJZG8lZlEQNuMjz@cluster0-hfbjn.mongodb.net/YelpCampv15?retryWrites=true&w=majority";
     // for end users.
+    console.log(process.env.DATABASEURL);
 mongoose.connect(url , {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -27,7 +28,7 @@ mongoose.connect(url , {
 });
 
 // for development =========================
-console.log(process.env.DATABASEURL);
+
 // mongoose.connect("mongodb+srv://Asfand:VbJZG8lZlEQNuMjz@cluster0-hfbjn.mongodb.net/development?retryWrites=true&w=majority", {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
