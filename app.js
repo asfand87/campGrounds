@@ -13,7 +13,7 @@ var seedDB = require("./seeds");
 var commentRoute = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes = require("./routes/index");
-var url = process.env.DATABASEURL || "mongodb+srv://Asfand:VbJZG8lZlEQNuMjz@cluster0-hfbjn.mongodb.net/YelpCampv15?retryWrites=true&w=majority";
+var url = process.env.DATABASEURL || "mongodb+srv://Asfand:vaWdARhhNc0J9XZG@cluster0-hfbjn.mongodb.net/YelpCampv15?retryWrites=true&w=majority";
     // for end users.
     console.log(process.env.DATABASEURL);
 mongoose.connect(url , {
