@@ -14,7 +14,10 @@ var seedDB = require("./seeds");
 var commentRoute = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes = require("./routes/index");
-var url = process.env.DATABASE.replace("%PASSWORD%", process.env.DATABASE_PASSWORD);
+
+const PORT = process.env.PORT || 3000;
+const HOST = "127.0.0.1" || process.env.IP;
+var url = `DATABASE=mongodb+srv://asfand:${process.env.PASSWORD}@cluster0.vh982yt.mongodb.net/YelpCampv15?retryWrites=true&w=majority`;
 // for end users.
 // console.log(process.env);
 mongoose.connect(url, {
@@ -76,8 +79,7 @@ app.use(indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoute);
 
-const PORT = process.env.PORT || 3000;
-const HOST = "127.0.0.1" || process.env.IP;
+
 
 app.listen(PORT, process.env.IP, function () {
     console.log(`App running on ${HOST}:${PORT}`);
