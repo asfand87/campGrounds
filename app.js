@@ -1,8 +1,9 @@
+require("dotenv").config();
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose"),
-flash = require("connect-flash"),
+    flash = require("connect-flash"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
@@ -13,10 +14,10 @@ var seedDB = require("./seeds");
 var commentRoute = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes = require("./routes/index");
-var url = process.env.DATABASEURL || "mongodb+srv://Asfand:yelpcamp@cluster0-hfbjn.mongodb.net/YelpCampv15?retryWrites=true&w=majority";
-    // for end users.
-    console.log(process.env.DATABASEURL);
-mongoose.connect(url , {
+var url = process.env.DATABASE.replace("%PASSWORD%", process.env.DATABASE_PASSWORD);
+// for end users.
+// console.log(process.env);
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -26,19 +27,6 @@ mongoose.connect(url , {
 }).catch(err => {
     console.log("error", err.message);
 });
-
-// for development =========================
-
-// mongoose.connect("mongodb+srv://Asfand:VbJZG8lZlEQNuMjz@cluster0-hfbjn.mongodb.net/development?retryWrites=true&w=majority", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false
-// }).then(() => {
-//     console.log("connected to DB");
-// }).catch(err => {
-//     console.log("error", err.message);
-// });
 
 
 //using ejs here so we don't have to type ejs at the end of files.
@@ -61,7 +49,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // using middle wear to send req.user to all the templates .
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.locals.currentUser = req.user; // currentUser = is used in header file in partials. so what ever will be passed through res.locals, it will go to all the templates.
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
@@ -81,17 +69,16 @@ passport.deserializeUser(User.deserializeUser());
 
 
 
-// here we are telling our app to use the routes we have aquired.
+
 // so by adding "/campgrounds" we are drying up code so that in the 
 // route files we don't have to say "/campgrounds/new" instead we only say /new and /campgrounds will be appended to it automatically.
 app.use(indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoute);
 
+const PORT = process.env.PORT || 3000;
+const HOST = "127.0.0.1" || process.env.IP;
 
-// app.listen(8080, function() {
-//     console.log('Example app listening on port 8080!');
-// });
-app.listen(process.env.PORT, process.env.IP, function() {
-    console.log("connected!!");
+app.listen(PORT, process.env.IP, function () {
+    console.log(`App running on ${HOST}:${PORT}`);
 })
