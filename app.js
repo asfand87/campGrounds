@@ -17,9 +17,8 @@ var commentRoute = require("./routes/comments"),
 
 const PORT = process.env.PORT || 3000;
 const HOST = "127.0.0.1" || process.env.IP;
-var url = `DATABASE=mongodb+srv://asfand:${process.env.PASSWORD}@cluster0.vh982yt.mongodb.net/YelpCampv15?retryWrites=true&w=majority`;
+var url = process.env.DATABASE;
 // for end users.
-// console.log(process.env);
 mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -28,7 +27,7 @@ mongoose.connect(url, {
 }).then(() => {
     console.log("connected to DB");
 }).catch(err => {
-    console.log("error", err.message);
+    console.log("error", err);
 });
 
 
